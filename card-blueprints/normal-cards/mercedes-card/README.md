@@ -1,25 +1,3 @@
-## Dwains-Dashboardv3-Blueprints for Mercedes Me 
-## Card Blueprint for Dwains Dashboard v3
-##### Created by Bourner
----
-
-### HACS components
-
-- Install [Mercedes Me](https://github.com/ReneNulschDE/mbapi2020) from [HACS](https://hacs.xyz).
-- Install [Car Wash Sensor](https://github.com/Limych/ha-car_wash) from [HACS](https://hacs.xyz).
-
-### Configuration
-
-1. Add the picture merc2.png to your config/www folder.
-2. Also add the templates below to your configuration.yaml. 
-<br> Search and replace "$license$" with your license plate number.
-It's the same like in the Mercedes Integration.
-
-### YAML Code
-<details>
-<summary> Click here to show Template YAML Code </summary>
-
-```
 - platform: template
   sensors:
     car_tire_pressure_rear_left:
@@ -36,7 +14,7 @@ It's the same like in the Mercedes Integration.
       value_template: '{{ states.binary_sensor.$license$_tire_warning.attributes.tirepressureFrontRight }}'
     car_rangeliquid:
       friendly_name: Car liquid range
-      value_template: '{{ states.sensor.$license$_odometer.attributes.rangeliquid }}'
+      value_template: '{{ states.sensor.$license$_range_liquid }}'
     car_service_days:
       friendly_name: Car service days
       value_template: '{{ states.sensor.$license$_odometer.attributes.serviceintervaldays }}'
@@ -207,18 +185,18 @@ It's the same like in the Mercedes Integration.
           {% endif %}
           
     my_car_lock_status:
-        friendly_name: Vergrendelstatus
+        friendly_name: Car Lock
         value_template: >-
           {% if is_state('sensor.$license$_lock', '0') %}
             Open
           {% elif is_state('sensor.$license$_lock', '1') %}
-            Intern vergrendeld
+            Internally closed
           {% elif is_state('sensor.$license$_lock', '2') %}
-            Extern vergrendeld
+            Externally closed
           {% elif is_state('sensor.$license$_lock', '3') %}
-            Selectief ontgrendeld
+            Selection opened
           {% else %}
-            Onbekend
+            Unknown
           {% endif %}
         icon_template: >
           {% if is_state('sensor.$license$_lock', '0') %}
@@ -226,34 +204,3 @@ It's the same like in the Mercedes Integration.
           {% else %}
             mdi:lock-outline
           {% endif %}
-```
-
-</details>
-
-### Installation: 
-  
-1.  Go to an Area on DD3
-2.  Go into Edit Mode
-3.  Choose Add Card
-4.  Use Dwains Dashboard Blueprint
-5.  Add YAML Code from file to HA
-6.  Click install Blueprint
-7.  Click Use this Blueprint
-
-
-### Links:
-* https://github.com/dwainscheeren/dwains-dashboard-blueprints
-* https://www.home-assistant.io/
-
----
-
-This is a Blueprint for adding a mercedes card which fits into DD3 Design.
-
-### Screenshots:
-![Screenshot_2022-05-01_om_12 21 30](https://user-images.githubusercontent.com/64064679/166141965-e1378ebe-39b5-42ff-a6c3-d64e508336b0.jpg)
-
-### Changelog
-#### 1.0.0
-- First release
-
-
